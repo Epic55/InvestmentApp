@@ -1,0 +1,6 @@
+[
+  {
+    "name": "MyCont1",
+    "imageUri": "131101356889.dkr.ecr.ap-south-1.amazonaws.com/mydockerrepo1:latest"
+  }
+]
