@@ -1,4 +1,4 @@
-# MyProject1
+# InvestmentApp
 Console investment app to manage data about stocks (shares). Abilities:
 - look data
 - insert data
