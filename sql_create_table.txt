@@ -1,0 +1,18 @@
+#CREATE A TABLE
+conn = psycopg2.connect(database = "testdb1", user = "postgres", password = "", host = "127.0.0.1", port = "5432")
+cur = conn.cursor()
+
+cur.execute('''CREATE TABLE COMPANY
+      (ID INT PRIMARY KEY     NOT NULL,
+      ticker         TEXT    NOT NULL,
+      boughtprice    INT     NOT NULL,
+      quantity       INT     NOT NULL,
+      boughtprice    INT,
+	  soldprice      REAL,
+	  soldpricetotal REAL,
+	  percentagegrow INT,
+	  moneygrow      INT);''')
+print("Table created successfully")
+conn.commit()
+
+conn.close()
