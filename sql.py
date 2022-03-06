@@ -1,4 +1,6 @@
 import psycopg2
+import pika, os, logging
+
 def select():
     print("SELECTING")
     conn = psycopg2.connect(database="testdb1", user="postgres", password="1", host="127.0.0.1", port="5432")
@@ -86,3 +88,20 @@ def update():
               ", PercentageGrow,% = ", row[7], ", MoneyGrow = ",
               row[8])
     conn.close()
+
+def sendmsg():
+    logging.basicConfig()
+
+    url = os.environ.get('CLOUDAMQP_URL',
+                         'amqps://')
+    params = pika.URLParameters(url)
+    params.socket_timeout = 5
+
+    connection = pika.BlockingConnection(params)
+    channel = connection.channel()
+    channel.queue_declare(queue='MyQueue1')
+
+    print("Preparing to send msg ...")
+    channel.basic_publish(exchange='', routing_key='MyQueue1', body=input("Enter msg "))
+    print("[x] Message sent to consumer")
+    connection.close()

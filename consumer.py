@@ -4,11 +4,11 @@ def process_function(msg):
   print(" Msg processing ...")
   print(" [x] Received " + str(msg))
 
-  time.sleep(5) # delays for 5 seconds
+  #time.sleep(5) # delays for 5 seconds
   print(" PDF processing finished");
   return;
 
-url = os.environ.get('CLOUDAMQP_URL', 'amqps://qcrhjtsz:4bATF2MDI0JTgtZaGrs6GiRlFoYKcHyd@puffin.rmq2.cloudamqp.com/qcrhjtsz')
+url = os.environ.get('CLOUDAMQP_URL', 'amqps://')
 params = pika.URLParameters(url)
 connection = pika.BlockingConnection(params)
 channel = connection.channel()

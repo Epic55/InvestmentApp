@@ -5,4 +5,4 @@ Console investment app to manage data about stocks (shares). Abilities:
 - delete data
 - update data
 
-App uses python 3 & postgresql 14.
+App uses python 3, postgresql 14, rabbitmq
