@@ -2,7 +2,7 @@ import psycopg2
 import pika, os, logging
 
 def select():
-    print("SELECTING")
+    #print("SELECTING")
     conn = psycopg2.connect(database="testdb1", user="postgres", password="1", host="127.0.0.1", port="5432")
     cur = conn.cursor()
     cur.execute("SELECT *  from stocks")
