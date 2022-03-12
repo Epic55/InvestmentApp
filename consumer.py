@@ -8,7 +8,7 @@ def process_function(msg):
   print(" PDF processing finished");
   return;
 
-url = os.environ.get('CLOUDAMQP_URL', 'amqps://')
+url = os.environ.get('CLOUDAMQP_URL', 'amqps://qcrhjtsz:@puffin.rmq2.cloudamqp.com/qcrhjtsz')
 params = pika.URLParameters(url)
 connection = pika.BlockingConnection(params)
 channel = connection.channel()

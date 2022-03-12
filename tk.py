@@ -33,12 +33,3 @@ def gui():
             e.grid(row=i, column=j)
         i=i+1
     my_w.mainloop()
-
-
-#i=0
-'''for stocks in r_set:
-    for j in range(len(stocks)):
-        e = Entry(my_w, width=10)
-        e.grid(row=i, column=j)
-        e.insert(END, stocks[j])
-    i=i+1'''
