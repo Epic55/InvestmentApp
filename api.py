@@ -1,10 +1,11 @@
 import requests
+import json
+from secrets import IEX_CLOUD_API_TOKEN
 def getapi():
-    url = "https://yh-finance.p.rapidapi.com/auto-complete"
-    querystring = {"q": input("Enter company "), "region": "US" }
-    headers = {
-        'x-rapidapi-host': "yh-finance.p.rapidapi.com",
-        'x-rapidapi-key': ""
-        }
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    print(response.text)
+    symbol=input("Enter Ticker ")
+    api_url = f'https://sandbox.iexapis.com/stable/stock/{symbol}/quote?token={IEX_CLOUD_API_TOKEN}'
+    data = requests.get(api_url).json()
+    price = data["latestPrice"]
+    marketcap = data['marketCap']
+    x = "{:.2f}".format(marketcap/1000000000000)
+    print("Ticker - ", symbol,", LatestPrice - ",price,"$, Capitalization - ", x,"T")
