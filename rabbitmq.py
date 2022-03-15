@@ -2,8 +2,7 @@ import pika, os, logging
 def sendmsg():
     logging.basicConfig()
 
-    url = os.environ.get('CLOUDAMQP_URL',
-                         'amqps://qcrhjtsz:@puffin.rmq2.cloudamqp.com/qcrhjtsz')
+    url = os.environ.get('CLOUDAMQP_URL', f'{CLOUD_AMQP}')
     params = pika.URLParameters(url)
     params.socket_timeout = 5
 
