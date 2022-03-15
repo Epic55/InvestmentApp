@@ -9,3 +9,4 @@ def getapi():
     marketcap = data['marketCap']
     x = "{:.2f}".format(marketcap/1000000000000)
     print("Ticker - ", symbol,", LatestPrice - ",price,"$, Capitalization - ", x,"T")
+#test
