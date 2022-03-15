@@ -1,4 +1,6 @@
 import pika, os, logging
+from secrets import *
+
 def sendmsg():
     logging.basicConfig()
 
