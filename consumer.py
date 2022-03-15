@@ -1,4 +1,5 @@
 import pika, os, time
+from secrets import *
 
 def process_function(msg):
   print(" Msg processing ...")
@@ -8,7 +9,7 @@ def process_function(msg):
   print(" PDF processing finished");
   return;
 
-url = os.environ.get('CLOUDAMQP_URL', 'amqps://qcrhjtsz:@puffin.rmq2.cloudamqp.com/qcrhjtsz')
+url = os.environ.get('CLOUDAMQP_URL', f'{CLOUD_AMQP}')
 params = pika.URLParameters(url)
 connection = pika.BlockingConnection(params)
 channel = connection.channel()
