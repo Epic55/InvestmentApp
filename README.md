@@ -1,7 +1,7 @@
 # InvestmentApp
 My pet project.
 
-I create myself this simple app.
+I created myself this simple app.
 
 Console & gui investment app to manage data about stocks (shares). Functions:
 - look data
