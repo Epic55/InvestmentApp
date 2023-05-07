@@ -1,12 +1,13 @@
-import requests
-import json
-from secrets import IEX_CLOUD_API_TOKEN
+import requests, json
+API_TOKEN = 'CSG2DIMZQ74IW1O1'
 def getapi():
-    symbol=input("Enter Ticker ")
-    api_url = f'https://sandbox.iexapis.com/stable/stock/{symbol}/quote?token={IEX_CLOUD_API_TOKEN}'
-    data = requests.get(api_url).json()
-    price = data["latestPrice"]
-    marketcap = data['marketCap']
-    x = "{:.2f}".format(marketcap/1000000000000)
-    print("Ticker - ", symbol,", LatestPrice - ",price,"$, Capitalization - ", x,"T")
-#test
+    symbol1 = input("Enter Ticker ")
+    api_url1 = f'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + symbol1 + '&apikey={API_TOKEN}'
+    data1 = requests.get(api_url1).json()
+    price = data1["Global Quote"]
+    if price['05. price'] >= price['08. previous close']:
+        char = '+'
+    else:
+        char = '-'
+    print("Ticker - " + price['01. symbol'], ", Price - " + price['05. price'],
+          ", Previous price - " + price['08. previous close'], ", Change - " + char + price['10. change percent'])

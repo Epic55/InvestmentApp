@@ -1,11 +1,22 @@
 from tkinter import *
-import tkinter  as tk
+import tkinter as tk
+import psycopg2
 from sqlalchemy import create_engine
+
+database = "a"
+user = "a"
+password = "1"
+
 def gui():
     my_w = tk.Tk()
     my_w.geometry("900x200")
-    my_conn = create_engine("postgresql://postgres:1@127.0.0.1/testdb1")
-    r_set=my_conn.execute("SELECT *  from stocks")
+    conn = psycopg2.connect(database=database, user=user, password=password, host="127.0.0.1", port="5432")
+    my_conn = conn.cursor()
+   # cur.execute("SELECT *  from stocks")
+   # my_conn = create_engine("postgresql://a:1@127.0.0.1/a")
+    r_set = my_conn.execute("SELECT *  from stocks")
+
+
 
     e=Label(my_w,width=13,text='ID',borderwidth=2, relief='ridge',anchor='center',font="Helvetica 8 bold")
     e.grid(row=0,column=0)
@@ -26,10 +37,10 @@ def gui():
     e=Label(my_w,width=13,text='MoneyGrow',borderwidth=2, relief='ridge',anchor='center',font="Helvetica 8 bold")
     e.grid(row=0,column=8)
 
-    i=1
+    i = 1
     for stocks in r_set:
         for j in range(len(stocks)):
             e = Label(my_w,width=13, text=stocks[j],borderwidth=2,relief='ridge', anchor="center")
             e.grid(row=i, column=j)
-        i=i+1
+        i = i + 1
     my_w.mainloop()

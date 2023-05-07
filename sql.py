@@ -1,8 +1,12 @@
 import psycopg2
 
+database = "a"
+user = "a"
+password = "1"
+
 def select():
     #print("SELECTING")
-    conn = psycopg2.connect(database="testdb1", user="postgres", password="1", host="127.0.0.1", port="5432")
+    conn = psycopg2.connect(database=database, user=user, password=password, host="127.0.0.1", port="5432")
     cur = conn.cursor()
     cur.execute("SELECT *  from stocks")
     rows = cur.fetchall()
@@ -17,22 +21,25 @@ def select():
 
 def insert():
     print("INSERTING")
-    conn = psycopg2.connect(database="testdb1", user="postgres", password="1", host="127.0.0.1", port="5432")
+    conn = psycopg2.connect(database=database, user=user, password=password, host="127.0.0.1", port="5432")
     cur = conn.cursor()
 
-    a=input("Enter TICKER ")
-    b=int(input("Enter BP "))
-    q=int(input("Enter Quantity "))
-    s=input("Enter SP (Leave blank if u haven't sold) ")
-    bpt=b*q
-    if s:
-        spt=int(s)*q
-        pg=100-(bpt*100/spt)
-        mg=spt-bpt
-        sql = "INSERT INTO stocks (ID,TICKER,BOUGHTPRICE,QUANTITY,SOLDPRICE,BoughtPriceTotal,SoldPriceTotal,PercentageGrow,MoneyGrow) VALUES (nextval('shares'),'{}',{},{},{},{},{},{},{})".format(a,b,q,s,bpt,spt,pg,mg)
+    ticker = input("Enter TICKER ")
+    boughtprice = int(input("Enter BoughtPrice "))
+    quantity = int(input("Enter Quantity "))
+    soldprice = input("Enter SoldPrice (Leave blank if u haven't sold) ")
+    boughtpricetotal = boughtprice * quantity
+    if soldprice:
+        soldpricetotal = int(soldprice) * quantity
+        percentagegrow = 100 - (boughtpricetotal * 100 / soldpricetotal)
+        moneygrow = soldpricetotal - boughtpricetotal
+
+        #nextval -IS AUTOINCREMENT FIELD, sequence1 - is SEQUENCE IN DB
+
+        sql_query = "INSERT INTO stocks (ID, TICKER, BOUGHTPRICE, QUANTITY, SOLDPRICE, BoughtPriceTotal, SoldPriceTotal, PercentageGrow, MoneyGrow) VALUES (nextval('sequence1'),'{}',{},{},{},{},{},{},{})".format(ticker, boughtprice, quantity, soldprice, boughtpricetotal, soldpricetotal, percentagegrow, moneygrow)
     else:
-        sql = "INSERT INTO stocks (ID,TICKER,BOUGHTPRICE,QUANTITY,BoughtPriceTotal) VALUES (nextval('shares'),'{}',{},{},{})".format(a, b, q, bpt)
-    cur.execute(sql)
+        sql_query = "INSERT INTO stocks (ID, TICKER, BOUGHTPRICE, QUANTITY, BoughtPriceTotal) VALUES (nextval('sequence1'),'{}',{},{},{})".format(ticker, boughtprice, quantity, boughtpricetotal)
+    cur.execute(sql_query)
 
     conn.commit()
     cur.execute("SELECT *  from stocks")
@@ -48,10 +55,10 @@ def insert():
 
 def delete():
     print("DELETING")
-    conn = psycopg2.connect(database="testdb1", user="postgres", password="1", host="127.0.0.1", port="5432")
+    conn = psycopg2.connect(database=database, user=user, password=password, host="127.0.0.1", port="5432")
     cur = conn.cursor()
-    sql = "DELETE from stocks where TICKER='{}';"
-    x=sql.format(input("Enter TICKER to delete a stock "))
+    sql_query = "DELETE from stocks where TICKER='{}';"
+    x = sql_query.format(input("Enter TICKER to delete a stock "))
     cur.execute(x)
     conn.commit()
     print("Total number of rows deleted :", cur.rowcount)
@@ -69,11 +76,11 @@ def delete():
 
 def update():
     print("UPDATING")
-    conn = psycopg2.connect(database="testdb1", user="postgres", password="1", host="127.0.0.1", port="5432")
+    conn = psycopg2.connect(database=database, user=user, password=password, host="127.0.0.1", port="5432")
     cur = conn.cursor()
 
-    sql = "UPDATE stocks set {} = '{}' where TICKER = '{}'"
-    x=sql.format(input("Enter Column "),input("Enter New_Value "),input("Enter TICKER of stock "))
+    sql_query = "UPDATE stocks SET {} = '{}' where TICKER = '{}'"
+    x = sql_query.format(input("Enter Column Name "), input("Enter New_Value "), input("Enter TICKER of stock "))
     cur.execute(x)
     conn.commit()
 
