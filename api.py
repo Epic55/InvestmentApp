@@ -1,5 +1,5 @@
 import requests, json
-API_TOKEN = 'CSG2DIMZQ74IW1O1'
+API_TOKEN = ''
 def getapi():
     symbol1 = input("Enter Ticker ")
     api_url1 = f'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + symbol1 + '&apikey={API_TOKEN}'

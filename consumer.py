@@ -1,5 +1,5 @@
 import pika, os, time
-CLOUD_AMQP = 'amqps://hqioxzsf:EjkYuY78VgmLVmxZ7x5g1vsMTMh-pr5n@puffin.rmq2.cloudamqp.com/hqioxzsf'
+CLOUD_AMQP = ''
 
 def process_function(msg):
   print(" Msg processing ...")
