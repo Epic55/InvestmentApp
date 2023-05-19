@@ -27,7 +27,7 @@ def insert():
     ticker = input("Enter TICKER ")
     boughtprice = int(input("Enter BoughtPrice "))
     quantity = int(input("Enter Quantity "))
-    soldprice = input("Enter SoldPrice (Leave blank if u haven't sold) ")
+    soldprice = int(input("Enter SoldPrice (Leave blank if u haven't sold) "))
     boughtpricetotal = boughtprice * quantity
     if soldprice:
         soldpricetotal = int(soldprice) * quantity
